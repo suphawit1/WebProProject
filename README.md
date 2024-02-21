@@ -1,5 +1,5 @@
-Web Test on githubHost (รอ 5-10 นาทีหลังอัพ)<br>
-https://suphawit1.github.io/WebProProject/<br>
+Web Test <br>
+https://warm-frangollo-c56458.netlify.app/
 
 Database:<br>
 https://www.phpmyadminonline.com/index.php<br>
