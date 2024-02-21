@@ -1,6 +1,11 @@
-Test web (ใช้เหมือน web อาจาร)
+Test web (ใช้เหมือน web อาจาร) <br>
 http://54.90.96.231/<br>
 
+FileZilla<br>
+54.90.96.231<br>
+Username:admin<br>
+Password:ไม่ต้องใส่<br>
+Port:21<br>
 
 Database:<br>
 https://www.phpmyadminonline.com/index.php<br>
