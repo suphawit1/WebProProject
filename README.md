@@ -3,6 +3,6 @@ https://suphawit1.github.io/WebProProject/<br>
 
 Database:<br>
 https://www.phpmyadminonline.com/index.php<br>
-Server:webpro.cpcueeyq8pic.us-east-1.rds.amazonaws.com<br>
-Username:admin<br>
-Password:nHINsFGvVfVxb1fc5Pyz
+Server: webpro.cpcueeyq8pic.us-east-1.rds.amazonaws.com<br>
+Username: admin<br>
+Password: nHINsFGvVfVxb1fc5Pyz
