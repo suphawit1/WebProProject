@@ -7,6 +7,8 @@
 </head>
 <body>
     <h1>Hello This is Working</h1>
-    
+    <?php
+        echo "<br><h1>This is PHP Testing</h1>"
+    ?>
 </body>
 </html>
