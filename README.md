@@ -1,5 +1,5 @@
-Web Test on githubHost (รอ 5-10 นาทีหลังอัพ) phpใช้ไม่ได้<br>
-https://suphawit1.github.io/WebProProject/<br>
+Test web (ใช้เหมือน web อาจาร)
+http://54.90.96.231/<br>
 
 
 Database:<br>
