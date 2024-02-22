@@ -1,7 +1,7 @@
 Test web (ใช้เหมือน web อาจาร) <br>
 http://54.90.96.231/<br>
 
-FileZilla<br>
+FileZilla (อัพลง github เลยก็ได้)<br>
 54.90.96.231<br>
 Username:admin<br>
 Password:ไม่ต้องใส่<br>
