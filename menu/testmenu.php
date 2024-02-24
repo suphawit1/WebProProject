@@ -21,7 +21,7 @@
                 $sql = "SELECT name FROM menu WHERE menuid = $i;";
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_assoc($result);
-                echo $row["name"]."จำนวน: ".$i." ที่<br>";
+                echo $row["name"]."จำนวน: ".$order[$i]." ที่<br>";
             }
         }
     ?>
