@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 60px;
+            box-shadow: 0px 0px 10px 0px black;
+        }
+
+        footer {
+            position: sticky;
+            bottom: 0;
+            z-index: 1;
+            background-color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            height: 60px;
+            box-shadow: 0px 0px 10px 0px black;
+        }
+
+        .headhome {
+            margin-left: 30px;
+        }
+
+        .foothome {
+            margin-right: 20px;
+        }
+
+        .firstcon {
+            background-image: url(images/backfirstcon.jpg);
+            height: 400px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            text-align: center;
+        }
+
+        .lastcon {
+            background-image: url(images/backlastcon.jpg);
+            height: 400px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        .secondcon {
+            background-color: bisque;
+            height: 400px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .leftsecon {
+            padding: 30px;
+            width: 50%;
+            text-align: center;
+        }
+        
+        .rightsecon {
+            padding: 30px;
+            text-align: center;
+            width: 50%;
+            display: flex;
+            align-items: center;
+        }
+
+        .headincon {
+            font-size: 36px;
+        }
+
+        .thirdcon {
+            background-color: white;
+            height: 400px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .leftthird {
+            padding: 30px;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rightthird {
+            padding: 30px;
+            width: 50%;
+            text-align: center;
+        }
+
+        .img {
+            height: 300px;
+            width: fit-content;
+        }
+
+        .para {
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .eleinfirst {
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+        .eleinfirst h1 {
+            font-size: 48px;
+        }
+
+        .eleinfirst p {
+            font-size: 24px;
+        }
+
+        .eleinlast {
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .fourthcon {
+            background-color: bisque;
+            height: 400px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .leftfourth{
+            padding: 30px;
+            width: 50%;
+            text-align: center;
+        }
+
+        .rightfourth{
+            padding: 30px;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fourthcon img {
+            height: 250px;
+            width: auto;
+        }
+
+        .btnonlast {
+            border-radius: 5px;
+            background-color: green;
+            height: 80px;
+            width: auto;
+            padding: 10px;
+            color: white;
+            font-size: 32px;
+            border: none;
+            text-align: center;
+        }
+
+        .btnonfoot {
+            border-radius: 5px;
+            background-color: green;
+            height: 35px;
+            width: auto;
+            padding: 5px;
+            color: white;
+            font-size: 18px;
+            border: none;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: blue;
+        }
+
+        .button {
+            transition-duration: 0.5s;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1 class="headhome">Logo</h1>
+        <h1 class="headhome">ครัวเรือนไทย</h1>
+    </header>
+
+    <div class="firstcon">
+        <div class="eleinfirst">
+            <h1>ขอยินดีต้อนรับสู่ร้านอาหารครัวเรือนไทย</h1><br>
+            <p>อิ่มอร่อยไปกับอาหารและเครื่องดื่มที่เราได้คัดสรรมาเพื่อคุณ</p>
+        </div>
+    </div>
+
+    <div class="secondcon">
+        <div class="leftsecon">
+            <h1 class="headincon">เกี่ยวกับเรา</h1><br>
+            <div class="para">
+                <p>เราเป็นร้านอาหารไทยที่จะนำพาทุกท่านไปอิ่มอร่อยกับมื้ออาหารสุดวิเศษ
+                    ด้วยเมนูอาหารที่หลากหลายมากมายและรสชาติที่กลมกล่อม อร่อยถูกใจท่านอย่างแน่นอน</p><br>
+                <p>ทุกเมนูที่เรานำเสนอได้ผ่านกระบวนการคิดและคัดสรรวัตถุดิบมาเป็นอย่างดี
+                    เมนูที่เราจะนำมาเสิร์ฟให้ท่านจะเป็นเมนูที่มอบความสุขและความอิ่มเอมใจ</p><br>
+                <p>ในส่วนสุดท้ายนี้หลังจากที่ท่านเพลิดเพลิดไปกับอาหารที่ทางเราได้จัดเสิร์ฟให้ท่านแล้ว
+                    เราก็หวังเป็นอย่างยิ่งที่จะได้เป็นผู้รับผิดชอบมื้ออาหารของท่านอีกในครั้งต่อๆไป</p>
+            </div>
+        </div>
+        <div class="rightsecon">
+            <img src="images/imgsecondcon.jpg" class="img">
+        </div>
+    </div>
+
+    <div class="thirdcon">
+        <div class="leftthird">
+            <img src="images/imgthird.jpg" class="img">
+        </div>
+        <div class="rightthird">
+            <h1 class="headincon">ทำด้วยใจรัก</h1><br>
+            <div class="para">
+                <p>ทุกเมนูที่ถูกรังสรรค์ได้ผ่านกระบวนการที่ละเอียดและพิถีพิถันตั้งแต่วิธีการคัดเลือกวัตถุดิบ
+                    การขนส่งและการเก็บรักษาเพื่อมั่นใจได้ว่าอาหารจากทางเรามีคุณภาพและความสดใหม่อยู่เสมอ</p><br>
+                <p>ปรุงโดยเชฟมืออาชีพที่มีประสบการณ์และความชำนาญในเทคนิคการปรุงวัตถุดิบต่างๆ เชฟมีความละเอียด
+                    แม่นยำและประณีตดังนั้นวางใจได้ว่าทุกจานของเรามีคุณภาพที่เต็มเปี่ยม</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="fourthcon">
+        <div class="leftfourth">
+            <h1 class="headincon">ให้เราดูแลมื้ออาหารให้คุณ</h1><br>
+            <div class="para">
+                <p>เราพร้อมที่จะบริการ ดูแล เสิร์ฟอาหารร้อนๆ
+                    เครื่องดื่มเย็นๆและของหวานอร่อยๆเพื่อให้คุณได้เพลิดเพลินไปกับมื้ออาหารและความสุขที่ได้รับประทานอาหารร่วมกัน
+                    เราหวังเป็นอย่างยิ่งที่จะได้ดูแลและคอยบริการคุณตลอดจนจบมื้ออาหาร
+                    เพราะความสุขของลูกค้าคือความสุขของเราเช่นกัน
+                </p><br>
+                <p>หลังจากนี้เราหวังอย่างยิ่งว่าท่านจะได้ประสบการณ์ที่ดีที่สุดสำหรับมื้ออาหารของท่านทั้งในครั้งนี้และครั้งต่อๆไป
+                    ทางเราขอขอบพระคุณเป็นอย่างที่ท่านไว้วางใจในร้านอาหารของเราหลังจากนี้ขอให้ท่านได้พบกับอาหาร
+                    เครื่องดื่มและของหวานที่รอให้สั่งอาหารเข้ามา ทางเราจะเตรียมมอบความสุขให้ท่านโดยเร็วที่สุดขอบคุณ</p>
+                <br>
+            </div>
+        </div>
+        <div class="rightfourth">
+            <img src="images/imgfourth.jpg">
+        </div>
+    </div>
+
+    <div class="lastcon">
+        <div class="eleinlast">
+            <button class="button btnonlast">เริ่มต้นการสั่งอาหาร</button>
+        </div>
+    </div>
+
+    <footer>
+        <p class="foothome">หากท่านติดปัญหาการใช้งานสามารถกดปุ่มนี้เพื่อเรียกพนักงานได้</p>
+        <button class="button btnonfoot foothome">ติดต่อพนักงาน</button>
+    </footer>
+</body>
+
+</html>
