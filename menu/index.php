@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>menu</title>
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
-<script src="bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>
 </head>
 <style>
     * {
@@ -56,6 +56,40 @@
         display: none;
     }
 </style>
+<?php
+    $servername = "webpro.cpcueeyq8pic.us-east-1.rds.amazonaws.com";
+    $username = "admin"; //ตามที่กำหนดให้
+    $password = "nHINsFGvVfVxb1fc5Pyz"; //ตามที่กำหนดให้
+    $dbname = "ProjectDB";    //ตามที่กำหนดให้
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+    $sql = "SELECT table_id FROM cus_table where stutus=1 AND ADDTIME(open_order_time,'01:30:00') < NOW()";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            echo $row['table_id'];
+            $sql = "UPDATE cus_table SET stutus = 0, open_order_time = null WHERE table_id = '".$row['table_id']."';";
+            $result = mysqli_query($conn, $sql);
+        }
+    }
+
+    session_set_cookie_params(5400);
+    session_start();
+
+    if (!isset($_SESSION['table_number'])) {
+        $sql = "SELECT table_id FROM cus_table WHERE stutus=0 limit 1;";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION['table_number'] = $row['table_id'];
+            $sql = "UPDATE cus_table SET stutus = 1, open_order_time = CURTIME() WHERE table_id = '".$_SESSION['table_number']."';";
+            $result = mysqli_query($conn, $sql);
+        }else{
+            echo "<h1>โต้ะเต็ม</h1>";
+        }
+    }
+?>
 <header style="background-color: Yellow;">
     <div class="container-fluid" id="header-container">
         <div class="container-fluid">
@@ -66,20 +100,12 @@
                 <div class="col-md-1 header-element" onclick="typeselect('เครื่องดื่ม')"><span class="font-header">เครื่องดื่ม</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ของหวาน')"><span class="font-header">ของหวาน</span></div>
                 <div class="col-md-2 header-element"><span class="font-header">รายการอาหารที่สั่ง</span></div>
-                <div class="col-md-1"><span class="font-header">โต้ะ</span></div>
+                <div class="col-md-1"><span class="font-header">โต้ะ <?php echo $_SESSION["table_number"]?></span></div>
             </div>
         </div>
     </div>
 </header>
 <body>
-    <?php
-        $servername = "webpro.cpcueeyq8pic.us-east-1.rds.amazonaws.com";
-        $username = "admin"; //ตามที่กำหนดให้
-        $password = "nHINsFGvVfVxb1fc5Pyz"; //ตามที่กำหนดให้
-        $dbname = "ProjectDB";    //ตามที่กำหนดให้
-        // Create connection
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
-    ?>
     <form action="testmenu.php" method="GET">
     <div class="container" id="tom/gang" style="margin-top:10px">
         <div class="row"><h1>ต้ม/แกง</h1></div>
@@ -180,7 +206,7 @@
     <footer>
         <div class="container">
             <div class="row" style="text-align: center;">
-                <div class="col-md-3"><button type="button" class="btn btn-warning">เรียกเก็บเงิน</button></div>
+                <div class="col-md-3"><button type="button" class="btn btn-warning" onclick="callemp()">เรียกเก็บเงิน</button></div>
                 <div class="col-md-3 "><button type="button" class="btn btn-warning">ติดต่อพนักงาน</button></div>
                 <div class="col-md-6"><button type="submit" class="btn btn-primary">ยืนยันการสั่ง</button></div>
             </div>
@@ -229,6 +255,22 @@
             deseret.classList.remove('hidden');
         }
     }
+    function callemp(){
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'callemp.php', true);
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                console.log('PHP script executed successfully');
+                console.log('Response from PHP:', xhr.responseText);
+            } else {
+                // Request failed
+                console.error('Failed to execute PHP script');
+            }
+        };
+        xhr.send();
+    }
+    
 </script>
 </form>
 </body>
