@@ -7,6 +7,17 @@
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     session_start();
     $tableNo = $_SESSION['table_number'];
-    $sql = "INSERT INTO emp_notify(tableNo,type) values($tableNo,'เรียกเก็บเงิน');";
-    $result = mysqli_query($conn, $sql);
+    if ($_POST['problem'] != ""){
+        $type = $_POST['problem'];
+        $massage = $_POST['massage'];
+        if($type == 'other'){
+            $type = $_POST['other'];
+        }
+        $sql = "INSERT INTO emp_notify(tableNo,type,massage,time) values($tableNo,'$type','$massage',NOW());";
+        $result = mysqli_query($conn, $sql);
+    }else{
+        $sql = "INSERT INTO emp_notify(tableNo,type,massage,time) values($tableNo,'เรียกเก็บเงิน','เรียกเก็บเงิน',NOW());";
+        $result = mysqli_query($conn, $sql);
+    }
+    
 ?>
