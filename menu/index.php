@@ -55,6 +55,40 @@
     .hidden{
         display: none;
     }
+    .popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    }
+
+    .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #888;
+    }
+
+    .close-button:hover {
+        color: #333;
+    }
 </style>
 <?php
     $servername = "webpro.cpcueeyq8pic.us-east-1.rds.amazonaws.com";
@@ -64,7 +98,7 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-    $sql = "SELECT table_id FROM cus_table where stutus=1 AND ADDTIME(open_order_time,'01:30:00') < NOW()";
+    $sql = "SELECT table_id FROM cus_table where stutus=1 AND ADDTIME(open_order_time,'02:30:00') < NOW()";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
@@ -83,7 +117,7 @@
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             $_SESSION['table_number'] = $row['table_id'];
-            $sql = "UPDATE cus_table SET stutus = 1, open_order_time = CURTIME() WHERE table_id = '".$_SESSION['table_number']."';";
+            $sql = "UPDATE cus_table SET stutus = 1, open_order_time = NOW() WHERE table_id = '".$_SESSION['table_number']."';";
             $result = mysqli_query($conn, $sql);
         }else{
             echo "<h1>โต้ะเต็ม</h1>";
@@ -105,6 +139,65 @@
         </div>
     </div>
 </header>
+
+<div id="popupPay" class="popup-container">
+    <div class="popup-content" style="text-align: center;">
+        <span class="close-button" id="closePopupButton" onclick="popclose()">&times;</span>
+        <img src="img/payment-icon-5646.png" width="150px" height="150px">
+        <h2>ยืนยันการเรียกเก็บเงิน</h2>
+        <p>ราคารวม:<?php
+            $table = $_SESSION['table_number'];
+            $sql = "SELECT amount FROM cus_table WHERE table_id=$table;";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+            echo $row['amount'];
+        ?>
+        บาท</p>
+        <button type="button" class="btn btn-success" style="margin-right:10px" onclick="callemp('pay')">ยืนยัน</button>
+        <button type="button" class="btn btn-danger" onclick="popclose()">ยกเลิก</button>
+    </div>
+</div>
+
+<div id="popupSuscess" class="popup-container">
+    <div class="popup-content" style="text-align: center;">
+        <span class="close-button" id="closePopupButton" onclick="popclose()">&times;</span>
+        <img src="img/check_icon.png" width="150px" height="150px">
+        <h2>แจ้งพนักงานเรียบร้อย</h2>
+        <button type="button" class="btn btn-success" onclick="popclose()">ยืนยัน</button>
+    </div>
+</div>
+
+<div id="popupCall" class="popup-container">
+    <div class="popup-content" style="text-align: center;">
+        <span class="close-button" id="closePopupButton" onclick="popclose()">&times;</span>
+        <img src="img/customer-service.png" width="150px" height="150px">
+        <h2>ติดต่อพนักงาน</h2>
+        <form id="myForm">
+            <div>
+                <select id="promselect" name="problem" class="form-select" style="margin-top:10px; border:black solid 2px; width:350px" onchange="toggleTextInput()">
+                    <option value="" selected>โปรดเลือกเรื่องที่ต้องการติดต่อ</option>
+                    <option value="อาหารส่งช้า">อาหารส่งช้า</option>
+                    <option value="ภาชนะไม่เพียงพอ">ภาชนะไม่เพียงพอ</option>
+                    <option value="มีปัญหาการสั่งอาหาร">มีปัญหาการสั่งอาหาร</option>
+                    <option value="other">อื่นๆ(โปรดระบุ)</option>
+                </select>
+                <label style="color:red; display:none;" id="selectwarning1">โปรดเลือกเรื่องที่ต้องการติดต่อ</label>
+            </div>
+            <div class="other-input" id="otherInput" style="display: none; margin-top:10px">
+                <label for="otherInput">ระบุเรื่องที่ต้องการติดต่อ</label>
+                <input type="text" name="other" id="othertext">
+                <label style="color:red; display:none;" id="selectwarning2">โปรดเลือกเรื่องที่ต้องการติดต่อ</label>
+            </div>
+            <div style="margin-top: 10px;">
+            <textarea id = "mass" name="massage" type="text" placeholder="ระบุข้อความเพื่มเติม" id="massage" style="border:black solid 1px; width:350px; height:70px"></textarea>
+            </div>
+
+            <button type="button" class="btn btn-success" style="margin-top:10px" onclick="callemp('call')">ยืนยัน</button>
+        </form>
+    </div>
+</div>
+
+
 <body>
     <form action="testmenu.php" method="GET">
     <div class="container" id="tom/gang" style="margin-top:10px">
@@ -150,7 +243,7 @@
                 <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
         }
         } else {
-        echo "0 results";
+            echo "0 results";
         }
     ?>
     </div>
@@ -172,7 +265,7 @@
                 <button style='width:30px;' onclick='minus(".$row["menuid"].")'>-</button>
                 <input id='".$row["menuid"]."'style='width:30px; text-align: center;' type='number' name='menu[".$row['menuid']."]' value=0>
                 <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
-        }
+            }
         } else {
         echo "0 results";
         }
@@ -206,8 +299,8 @@
     <footer>
         <div class="container">
             <div class="row" style="text-align: center;">
-                <div class="col-md-3"><button type="button" class="btn btn-warning" onclick="callemp()">เรียกเก็บเงิน</button></div>
-                <div class="col-md-3 "><button type="button" class="btn btn-warning">ติดต่อพนักงาน</button></div>
+                <div class="col-md-3"><button type="button" class="btn btn-warning" onclick="popup('pay')">เรียกเก็บเงิน</button></div>
+                <div class="col-md-3 "><button type="button" class="btn btn-warning" onclick="popup('call')">ติดต่อพนักงาน</button></div>
                 <div class="col-md-6"><button type="submit" class="btn btn-primary">ยืนยันการสั่ง</button></div>
             </div>
         </div>
@@ -255,21 +348,67 @@
             deseret.classList.remove('hidden');
         }
     }
-    function callemp(){
-        var xhr = new XMLHttpRequest();
+    function callemp(act){
+        var selectElement = document.getElementById("promselect");
+        var othertext = document.getElementById("othertext");
+        var warn1 = document.getElementById("selectwarning1");
+        var warn2 = document.getElementById("selectwarning2");
+        var choice = document.getElementById("choice");
 
-        xhr.open('GET', 'callemp.php', true);
-        xhr.onload = function() {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                console.log('PHP script executed successfully');
-                console.log('Response from PHP:', xhr.responseText);
-            } else {
-                // Request failed
-                console.error('Failed to execute PHP script');
-            }
-        };
-        xhr.send();
+        if (selectElement.value === "" && act == "call"){
+            warn1.style.display = 'block';
+            return;
+        }else if(selectElement.value === "other" && othertext.value === "" && act == "call"){
+            warn2.style.display = 'block';
+            return;
+        }
+
+        var formData = new FormData(document.getElementById("myForm"));
+
+        // Send data via AJAX
+        fetch('callemp.php', {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            console.log("pass")
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+
+        document.getElementById('popupPay').style.display = 'none';
+        document.getElementById('popupCall').style.display = 'none';
+        document.getElementById('popupSuscess').style.display = 'block';
+        selectElement.value = "";
+        document.getElementById('othertext').value = '';
+        document.getElementById('mass').value = '';
     }
+    function popup(act){
+        if (act == "pay"){
+            document.getElementById('popupPay').style.display = 'block';
+        }else if(act == "call"){
+            document.getElementById('popupCall').style.display = 'block';
+        }
+        
+    }
+    function popclose(){
+        document.getElementById('popupPay').style.display = 'none';
+        document.getElementById('popupCall').style.display = 'none';
+        document.getElementById('popupSuscess').style.display = 'none';
+        document.getElementById("selectwarning1").style.display = 'none';
+        document.getElementById("selectwarning2").style.display = 'none';
+    }
+    function toggleTextInput() {
+            var selectElement = document.getElementById("promselect");
+            var otherDiv = document.getElementById("otherInput");
+            var othertext = document.getElementById("othertext");
+
+            if (selectElement.value === "other") {
+                otherDiv.style.display = "block";
+            } else {
+                otherDiv.style.display = "none";
+                othertext.value="";
+            }
+        }
     
 </script>
 </form>
