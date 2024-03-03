@@ -25,25 +25,8 @@
             box-shadow: 0px 0px 10px 0px black;
         }
 
-        footer {
-            position: sticky;
-            bottom: 0;
-            z-index: 1;
-            background-color: white;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-end;
-            height: 60px;
-            box-shadow: 0px 0px 10px 0px black;
-        }
-
         .headhome {
             margin-left: 30px;
-        }
-
-        .foothome {
-            margin-right: 20px;
         }
 
         .firstcon {
@@ -54,72 +37,6 @@
             background-size: cover;
             position: relative;
             text-align: center;
-        }
-
-        .lastcon {
-            background-image: url(images/backlastcon.jpg);
-            height: 400px;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: relative;
-            opacity: 0.9;
-        }
-
-        .secondcon {
-            background-color: bisque;
-            height: 400px;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .leftsecon {
-            padding: 30px;
-            width: 50%;
-            text-align: center;
-        }
-        
-        .rightsecon {
-            padding: 30px;
-            text-align: center;
-            width: 50%;
-            display: flex;
-            align-items: center;
-        }
-
-        .headincon {
-            font-size: 36px;
-        }
-
-        .thirdcon {
-            background-color: white;
-            height: 400px;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .leftthird {
-            padding: 30px;
-            width: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .rightthird {
-            padding: 30px;
-            width: 50%;
-            text-align: center;
-        }
-
-        .img {
-            height: 300px;
-            width: fit-content;
-        }
-
-        .para {
-            text-align: left;
-            font-size: 18px;
         }
 
         .eleinfirst {
@@ -139,12 +56,50 @@
             font-size: 24px;
         }
 
-        .eleinlast {
-            align-items: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .secondcon {
+            background-color: bisque;
+            height: 400px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .leftsecon {
+            padding: 30px;
+            width: 50%;
+            text-align: center;
+        }
+
+        .rightsecon {
+            padding: 30px;
+            width: 50%;
+            background-image: url(images/imgsecondcon.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .thirdcon {
+            background-color: rgb(249, 211, 163);
+            height: 400px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .leftthird {
+            padding: 30px;
+            width: 50%;
+            background-image: url(images/imgthird.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .rightthird {
+            padding: 30px;
+            width: 50%;
+            text-align: center;
         }
 
         .fourthcon {
@@ -154,23 +109,47 @@
             flex-direction: row;
         }
 
-        .leftfourth{
+        .leftfourth {
             padding: 30px;
             width: 50%;
             text-align: center;
         }
 
-        .rightfourth{
+        .rightfourth {
             padding: 30px;
             width: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-image: url(images/imgfourth.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .headincon {
+            font-size: 36px;
         }
 
-        .fourthcon img {
-            height: 250px;
-            width: auto;
+        .para {
+            text-align: left;
+            font-size: 18px;
+        }
+        
+        .lastcon {
+            background-image: url(images/backlastcon.jpg);
+            height: 400px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            opacity: 0.9;
+        }
+        
+        .eleinlast {
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .btnonlast {
@@ -183,6 +162,23 @@
             font-size: 32px;
             border: none;
             text-align: center;
+        }
+        
+        footer {
+            position: sticky;
+            bottom: 0;
+            z-index: 1;
+            background-color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            height: 60px;
+            box-shadow: 0px 0px 10px 0px black;
+        }
+        
+        .foothome {
+            margin-right: 20px;
         }
 
         .btnonfoot {
@@ -202,7 +198,7 @@
         }
 
         .button {
-            transition-duration: 0.5s;
+            transition-duration: 0.4s;
         }
     </style>
 
@@ -233,15 +229,11 @@
                     เราก็หวังเป็นอย่างยิ่งที่จะได้เป็นผู้รับผิดชอบมื้ออาหารของท่านอีกในครั้งต่อๆไป</p>
             </div>
         </div>
-        <div class="rightsecon">
-            <img src="images/imgsecondcon.jpg" class="img">
-        </div>
+        <div class="rightsecon"></div>
     </div>
 
     <div class="thirdcon">
-        <div class="leftthird">
-            <img src="images/imgthird.jpg" class="img">
-        </div>
+        <div class="leftthird"></div>
         <div class="rightthird">
             <h1 class="headincon">ทำด้วยใจรัก</h1><br>
             <div class="para">
@@ -268,9 +260,7 @@
                 <br>
             </div>
         </div>
-        <div class="rightfourth">
-            <img src="images/imgfourth.jpg">
-        </div>
+        <div class="rightfourth"></div>
     </div>
 
     <div class="lastcon">
