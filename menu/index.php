@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>menu</title>
-    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="bootstrap/bootstrap.bundle.min.js"></script>
+    <link href="../bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="../bootstrap/bootstrap.bundle.min.js"></script>
 </head>
 <style>
     * {
@@ -128,11 +128,15 @@
     <div class="container-fluid" id="header-container">
         <div class="container-fluid">
             <div class="row" style="text-align: center;">
-                <div class="col-md-3 header-element" onclick="typeselect('')"><span class="font-header">logo</span></div>
-                <div class="col-md-2 header-element" onclick="typeselect('ต้มแกง')"><span class="font-header">ต้ม/แกง</span></div>
-                <div class="col-md-2 header-element" onclick="typeselect('ผัดทอด')"><span class="font-header">ผัด/ทอด</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('')"><span class="font-header">logo</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('แกง')"><span class="font-header">แกง</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('ผัด')"><span class="font-header">ผัด</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('เครื่องดื่ม')"><span class="font-header">เครื่องดื่ม</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ของหวาน')"><span class="font-header">ของหวาน</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('ทอด')"><span class="font-header">ทอด</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('ปิ้งย่าง')"><span class="font-header">ปิ้ง/ย่าง</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('ยำ')"><span class="font-header">ยำ</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('ข้าว')"><span class="font-header">ข้าว</span></div>
                 <div class="col-md-2 header-element"><span class="font-header">รายการอาหารที่สั่ง</span></div>
                 <div class="col-md-1"><span class="font-header">โต้ะ <?php echo $_SESSION["table_number"]?></span></div>
             </div>
@@ -200,10 +204,10 @@
 
 <body>
     <form action="testmenu.php" method="GET">
-    <div class="container" id="tom/gang" style="margin-top:10px">
-        <div class="row"><h1>ต้ม/แกง</h1></div>
+    <div class="container" id="soup" style="margin-top:10px">
+        <div class="row"><h1>แกง</h1></div>
     <?php
-        $sql = "SELECT * FROM menu WHERE type='ต้ม/แกง';";
+        $sql = "SELECT * FROM menu WHERE type='แกง';";
         $result = mysqli_query($conn, $sql);
 
         $numrow = mysqli_num_rows($result);
@@ -224,10 +228,10 @@
     ?>
     </div>
 
-    <div class="container" id="pat/tod" style="margin-top:10px">
-        <div class="row"><h1>ผัด/ทอด</h1></div>
+    <div class="container" id="fry" style="margin-top:10px">
+        <div class="row"><h1>ผัด</h1></div>
     <?php
-        $sql = "SELECT * FROM menu WHERE type='ผัด/ทอด';";
+        $sql = "SELECT * FROM menu WHERE type='ผัด';";
         $result = mysqli_query($conn, $sql);
 
         $numrow = $numrow+mysqli_num_rows($result);
@@ -290,6 +294,104 @@
             }
         }
     ?>
+    </div>
+
+    <div class="container" id="deep-fry" style="margin-top:10px">
+        <div class="row"><h1>ทอด</h1></div>
+    <?php
+        $sql = "SELECT * FROM menu WHERE type='ทอด';";
+        $result = mysqli_query($conn, $sql);
+
+        $numrow = $numrow+mysqli_num_rows($result);
+        if (mysqli_num_rows($result) > 0) {
+
+        while($row = mysqli_fetch_assoc($result)) {
+            echo "<div class='row' style='margin-top:10px;'><div class='col-md-3'><img src='" . $row["image"]. "' width='100%' height='100%'></div>";
+            echo "<div class='col-md-3'><h2>". $row["name"]. "</h2></div>";
+            echo "<div class='col-md-3'><h2>". $row["price"]. " บาท</h2></div>";
+            echo "<div class='col-md-3'>
+                <button style='width:30px;' onclick='minus(".$row["menuid"].")'>-</button>
+                <input id='".$row["menuid"]."'style='width:30px; text-align: center;' type='number' name='menu[".$row['menuid']."]' value=0>
+                <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
+            }
+        } else {
+        echo "0 results";
+        }
+    ?>
+    </div>
+
+    <div class="container" id="grill" style="margin-top:10px">
+        <div class="row"><h1>ปิ้ง/ย่าง</h1></div>
+    <?php
+        $sql = "SELECT * FROM menu WHERE type='ปิ้ง/ย่าง';";
+        $result = mysqli_query($conn, $sql);
+
+        $numrow = $numrow+mysqli_num_rows($result);
+        if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+            echo "<div class='row' style='margin-top:10px;'><div class='col-md-3'><img src='" . $row["image"]. "' width='100%' height='100%'></div>";
+            echo "<div class='col-md-3'><h2>". $row["name"]. "</h2></div>";
+            echo "<div class='col-md-3'><h2>". $row["price"]. " บาท</h2></div>";
+            echo "<div class='col-md-3'>
+                <button style='width:30px;' onclick='minus(".$row["menuid"].")'>-</button>
+                <input id='".$row["menuid"]."'style='width:30px; text-align: center;' type='number' name='menu[".$row['menuid']."]' value=0>
+                <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
+            }
+        } else {
+        echo "0 results";
+        }
+    ?>
+    </div>
+
+    <div class="container" id="yum" style="margin-top:10px">
+        <div class="row"><h1>ยำ</h1></div>
+    <?php
+        $sql = "SELECT * FROM menu WHERE type='ยำ';";
+        $result = mysqli_query($conn, $sql);
+
+        $numrow = $numrow+mysqli_num_rows($result);
+        if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+            echo "<div class='row' style='margin-top:10px;'><div class='col-md-3'><img src='" . $row["image"]. "' width='100%' height='100%'></div>";
+            echo "<div class='col-md-3'><h2>". $row["name"]. "</h2></div>";
+            echo "<div class='col-md-3'><h2>". $row["price"]. " บาท</h2></div>";
+            echo "<div class='col-md-3'>
+                <button style='width:30px;' onclick='minus(".$row["menuid"].")'>-</button>
+                <input id='".$row["menuid"]."'style='width:30px; text-align: center;' type='number' name='menu[".$row['menuid']."]' value=0>
+                <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
+            }
+        } else {
+        echo "0 results";
+        }
+    ?>
+    </div>
+
+    <div class="container" id="rice" style="margin-top:10px">
+        <div class="row"><h1>ข้าว</h1></div>
+    <?php
+        $sql = "SELECT * FROM menu WHERE type='ข้าว';";
+        $result = mysqli_query($conn, $sql);
+
+        $numrow = $numrow+mysqli_num_rows($result);
+        if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+            echo "<div class='row' style='margin-top:10px;'><div class='col-md-3'><img src='" . $row["image"]. "' width='100%' height='100%'></div>";
+            echo "<div class='col-md-3'><h2>". $row["name"]. "</h2></div>";
+            echo "<div class='col-md-3'><h2>". $row["price"]. " บาท</h2></div>";
+            echo "<div class='col-md-3'>
+                <button style='width:30px;' onclick='minus(".$row["menuid"].")'>-</button>
+                <input id='".$row["menuid"]."'style='width:30px; text-align: center;' type='number' name='menu[".$row['menuid']."]' value=0>
+                <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
+            }
+        } else {
+        echo "0 results";
+        }
+    ?>
+    </div>
+
     <input type="hidden" name="row"
     <?php
         echo "value='".$numrow."'"
@@ -320,19 +422,29 @@
         quantity.value = parseInt(quantity.value) + 1;
     }
     function typeselect(type){
-        var soup = document.getElementById('tom/gang')
-        var fry = document.getElementById('pat/tod')
+        console.log(type)
+        var soup = document.getElementById('soup')
+        var fry = document.getElementById('fry')
         var drink = document.getElementById('drink')
         var deseret = document.getElementById('deseret')
+        var deepfry = document.getElementById('deep-fry')
+        var grill = document.getElementById('grill')
+        var yum = document.getElementById('yum')
+        var rice = document.getElementById('rice')
 
         soup.classList.add('hidden');
         fry.classList.add('hidden');
         drink.classList.add('hidden');
         deseret.classList.add('hidden');
-        if (type == 'ต้มแกง'){
+        deepfry.classList.add('hidden');
+        grill.classList.add('hidden');
+        yum.classList.add('hidden');
+        rice.classList.add('hidden');
+
+        if (type == 'แกง'){
             soup.classList.remove('hidden');
         }
-        else if(type == 'ผัดทอด'){
+        else if(type == 'ผัด'){
             fry.classList.remove('hidden');
         }
         else if(type == 'เครื่องดื่ม'){
@@ -341,11 +453,25 @@
         else if(type == 'ของหวาน'){
             deseret.classList.remove('hidden');
         }
+        else if(type == "ทอด"){
+            deepfry.classList.remove('hidden');
+        }
+        else if(type == "ปิ้งย่าง"){
+            grill.classList.remove('hidden');
+        }else if(type == "ยำ"){
+            yum.classList.remove('hidden');
+        }else if(type == "ข้าว"){
+            rice.classList.remove('hidden');
+        }
         else{
             soup.classList.remove('hidden');
             fry.classList.remove('hidden');
             drink.classList.remove('hidden');
             deseret.classList.remove('hidden');
+            deepfry.classList.remove('hidden');
+            grill.classList.remove('hidden');
+            yum.classList.remove('hidden');
+            rice.classList.remove('hidden');
         }
     }
     function callemp(act){
