@@ -15,7 +15,7 @@
     <title>test</title>
     <link href="../bootstrap/bootstrap.min.css" rel="stylesheet">
     <script src="../bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="onload.js"></script>
+    <?php include 'onload.php'; ?>
     <script src="pop.js"></script>
 </head>
 <body>
