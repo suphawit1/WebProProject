@@ -6,9 +6,16 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-    $id = (int)$_POST['notify_id'];
-    $sql = "DELETE FROM emp_notify WHERE notify_id = $id;";
-    $result = mysqli_query($conn, $sql);
-    
+    if (isset($_POST['notify_id'])){
+        $id = (int)$_POST['notify_id'];
+        $sql = "DELETE FROM emp_notify WHERE notify_id = $id;";
+        $result = mysqli_query($conn, $sql);
+    }else{
+        $sql = "SELECT COUNT(notify_id) FROM emp_notify";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $num = $row['COUNT(notify_id)'];
+        echo $num;
+    }
     
 ?>
