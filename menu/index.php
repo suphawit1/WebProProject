@@ -13,6 +13,16 @@
         padding: 0;
         box-sizing: border-box;
         }
+    @font-face {
+        font-family: myWebFont;
+        src: url(../font/K2D-Regular.ttf);
+    }
+
+    body {
+        font-family: myWebFont;
+        font-size: 20px;
+    }
+
     header{
         position: sticky;
         top: 0;
@@ -131,12 +141,12 @@
                 <div class="col-md-1 header-element" onclick="typeselect('')"><span class="font-header">logo</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('แกง')"><span class="font-header">แกง</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ผัด')"><span class="font-header">ผัด</span></div>
-                <div class="col-md-1 header-element" onclick="typeselect('เครื่องดื่ม')"><span class="font-header">เครื่องดื่ม</span></div>
-                <div class="col-md-1 header-element" onclick="typeselect('ของหวาน')"><span class="font-header">ของหวาน</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ทอด')"><span class="font-header">ทอด</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ปิ้งย่าง')"><span class="font-header">ปิ้ง/ย่าง</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ยำ')"><span class="font-header">ยำ</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ข้าว')"><span class="font-header">ข้าว</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('เครื่องดื่ม')"><span class="font-header">เครื่องดื่ม</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('ของหวาน')"><span class="font-header">ของหวาน</span></div>
                 <div class="col-md-2 header-element"><span class="font-header">รายการอาหารที่สั่ง</span></div>
                 <div class="col-md-1"><span class="font-header">โต้ะ <?php echo $_SESSION["table_number"]?></span></div>
             </div>
@@ -252,50 +262,6 @@
     ?>
     </div>
 
-    <div class="container" id="drink" style="margin-top:10px">
-        <div class="row"><h1>เครื่องดื่ม</h1></div>
-    <?php
-        $sql = "SELECT * FROM menu WHERE type='เครื่องดื่ม';";
-        $result = mysqli_query($conn, $sql);
-
-        $numrow = $numrow+mysqli_num_rows($result);
-        if (mysqli_num_rows($result) > 0) {
-        // output data of each row
-        while($row = mysqli_fetch_assoc($result)) {
-            echo "<div class='row' style='margin-top:10px;'><div class='col-md-3'><img src='" . $row["image"]. "' width='100%' height='100%'></div>";
-            echo "<div class='col-md-3'><h2>". $row["name"]. "</h2></div>";
-            echo "<div class='col-md-3'><h2>". $row["price"]. " บาท</h2></div>";
-            echo "<div class='col-md-3'>
-                <button style='width:30px;' onclick='minus(".$row["menuid"].")'>-</button>
-                <input id='".$row["menuid"]."'style='width:30px; text-align: center;' type='number' name='menu[".$row['menuid']."]' value=0>
-                <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
-            }
-        } else {
-        echo "0 results";
-        }
-    ?>
-    </div>
-    <div class="container" id="deseret" style="margin-top:10px">
-        <div class="row"><h1>ของหวาน</h1></div>
-    <?php
-        $sql = "SELECT * FROM menu WHERE type='ของหวาน';";
-        $result = mysqli_query($conn, $sql);
-        $numrow = $numrow+mysqli_num_rows($result);
-
-        if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_assoc($result)) {
-                echo "<div class='row' style='margin-top:10px;'><div class='col-md-3'><img src='" . $row["image"]. "' width='100%' height='100%'></div>";
-                echo "<div class='col-md-3'><h2>". $row["name"]. "</h2></div>";
-                echo "<div class='col-md-3'><h2>". $row["price"]. " บาท</h2></div>";
-                echo "<div class='col-md-3'>
-                    <button style='width:30px;' onclick='minus(".$row["menuid"].")'>-</button>
-                    <input id='".$row["menuid"]."'style='width:30px; text-align: center;' type='number' name='menu[".$row['menuid']."]' value=0>
-                    <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
-            }
-        }
-    ?>
-    </div>
-
     <div class="container" id="deep-fry" style="margin-top:10px">
         <div class="row"><h1>ทอด</h1></div>
     <?php
@@ -388,6 +354,50 @@
             }
         } else {
         echo "0 results";
+        }
+    ?>
+    </div>
+
+    <div class="container" id="drink" style="margin-top:10px">
+        <div class="row"><h1>เครื่องดื่ม</h1></div>
+    <?php
+        $sql = "SELECT * FROM menu WHERE type='เครื่องดื่ม';";
+        $result = mysqli_query($conn, $sql);
+
+        $numrow = $numrow+mysqli_num_rows($result);
+        if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+            echo "<div class='row' style='margin-top:10px;'><div class='col-md-3'><img src='" . $row["image"]. "' width='100%' height='100%'></div>";
+            echo "<div class='col-md-3'><h2>". $row["name"]. "</h2></div>";
+            echo "<div class='col-md-3'><h2>". $row["price"]. " บาท</h2></div>";
+            echo "<div class='col-md-3'>
+                <button style='width:30px;' onclick='minus(".$row["menuid"].")'>-</button>
+                <input id='".$row["menuid"]."'style='width:30px; text-align: center;' type='number' name='menu[".$row['menuid']."]' value=0>
+                <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
+            }
+        } else {
+        echo "0 results";
+        }
+    ?>
+    </div>
+    <div class="container" id="deseret" style="margin-top:10px">
+        <div class="row"><h1>ของหวาน</h1></div>
+    <?php
+        $sql = "SELECT * FROM menu WHERE type='ของหวาน';";
+        $result = mysqli_query($conn, $sql);
+        $numrow = $numrow+mysqli_num_rows($result);
+
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                echo "<div class='row' style='margin-top:10px;'><div class='col-md-3'><img src='" . $row["image"]. "' width='100%' height='100%'></div>";
+                echo "<div class='col-md-3'><h2>". $row["name"]. "</h2></div>";
+                echo "<div class='col-md-3'><h2>". $row["price"]. " บาท</h2></div>";
+                echo "<div class='col-md-3'>
+                    <button style='width:30px;' onclick='minus(".$row["menuid"].")'>-</button>
+                    <input id='".$row["menuid"]."'style='width:30px; text-align: center;' type='number' name='menu[".$row['menuid']."]' value=0>
+                    <button style='width:30px;' onclick='plus(".$row["menuid"].")'>+</button></div></div>";
+            }
         }
     ?>
     </div>
