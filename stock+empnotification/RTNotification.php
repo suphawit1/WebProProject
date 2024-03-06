@@ -136,7 +136,7 @@
     <div class="container-fluid" id="header-container">
         <div class="container-fluid">
             <div class="row" style="text-align: center;">
-                <div class="col-md-3 header-element"><span class="font-header">logo</span></div>
+                <div class="col-md-3 header-element"><span class="font-header"><img src="img/logo.png"></span></div>
                 <div class="col-md-3 header-element"><span class="font-header">รายการอาหารที่สั่ง</span></div>
                 <div class="col-md-3 header-element" onclick="window.location.href = 'index.php'"><span class="font-header">รายการวัตถุดิบ</span></div>
                 <div class="col-md-1 header-element">
