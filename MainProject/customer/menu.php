@@ -29,7 +29,7 @@
         top: 0;
         z-index: 1000;
         height: fit-content;
-        border: 10px yellow solid;
+        border: yellow solid;
     }
     footer{
         position: fixed;
@@ -47,12 +47,15 @@
         }
     .header-element{
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .header-element:hover{
         background-color: yellowgreen;
     }
     .font-header{
-        font-size: 150%;
+        font-size: 28px;
     }
     input[type="number"] {
         -webkit-appearance: textfield;
@@ -78,7 +81,7 @@
     <div class="container-fluid" id="header-container">
         <div class="container-fluid">
             <div class="row" style="text-align: center;">
-                <div class="col-md-1 header-element" onclick="typeselect('')"><span class="font-header">logo</span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('')"><img src="images/logo.png" style="height: 70px; width:auto;"></span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('แกง')"><span class="font-header">แกง</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ผัด')"><span class="font-header">ผัด</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ทอด')"><span class="font-header">ทอด</span></div>
@@ -88,7 +91,7 @@
                 <div class="col-md-1 header-element" onclick="typeselect('เครื่องดื่ม')"><span class="font-header">เครื่องดื่ม</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ของหวาน')"><span class="font-header">ของหวาน</span></div>
                 <div class="col-md-2 header-element"><span class="font-header">รายการอาหารที่สั่ง</span></div>
-                <div class="col-md-1"><span class="font-header">โต้ะ <?php echo $_GET['table']?></span></div>
+                <div class="col-md-1 header-element"><span class="font-header">โต็ะ <?php echo $_GET['table']?></span></div>
             </div>
         </div>
     </div>
@@ -352,9 +355,9 @@
     <footer>
         <div class="container">
             <div class="row" style="text-align: center;">
-                <div class="col-md-3"><button type="button" class="btn btn-warning" onclick="popup('pay')">เรียกเก็บเงิน</button></div>
-                <div class="col-md-3 "><button type="button" class="btn btn-warning" onclick="popup('call')">ติดต่อพนักงาน</button></div>
-                <div class="col-md-6"><button type="submit" class="btn btn-primary">ยืนยันการสั่ง</button></div>
+                <div class="col-md-4"><button type="button" class="btn btn-warning" onclick="popup('pay')">เรียกเก็บเงิน</button></div>
+                <div class="col-md-4 "><button type="button" class="btn btn-warning" onclick="popup('call')">ติดต่อพนักงาน</button></div>
+                <div class="col-md-4"><button type="submit" class="btn btn-primary">ยืนยันการสั่ง</button></div>
             </div>
         </div>
     </footer>
