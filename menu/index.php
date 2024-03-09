@@ -112,9 +112,7 @@
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
-            echo $row['table_id'];
             $sql = "UPDATE cus_table SET stutus = 0, open_order_time = null WHERE table_id = '".$row['table_id']."';";
-            $result = mysqli_query($conn, $sql);
         }
     }
 
@@ -128,7 +126,6 @@
             $row = mysqli_fetch_assoc($result);
             $_SESSION['table_number'] = $row['table_id'];
             $sql = "UPDATE cus_table SET stutus = 1, open_order_time = NOW() WHERE table_id = '".$_SESSION['table_number']."';";
-            $result = mysqli_query($conn, $sql);
         }else{
             echo "<h1>โต้ะเต็ม</h1>";
         }
