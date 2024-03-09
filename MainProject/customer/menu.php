@@ -14,15 +14,6 @@
         padding: 0;
         box-sizing: border-box;
         }
-    @font-face {
-        font-family: myWebFont;
-        src: url(font/K2D-Regular.ttf);
-    }
-
-    body {
-        font-family: myWebFont;
-        font-size: 20px;
-    }
 
     header{
         position: sticky;
@@ -74,14 +65,15 @@
     $dbname = "ProjectDB";    //ตามที่กำหนดให้
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
-
+    session_start();
+    $_SESSION["table"] = $_GET['table'];
 ?>
 
 <header style="background-color: Yellow;">
     <div class="container-fluid" id="header-container">
         <div class="container-fluid">
             <div class="row" style="text-align: center;">
-                <div class="col-md-1 header-element" onclick="typeselect('')"><img src="images/logo.png" style="height: 70px; width:auto;"></span></div>
+                <div class="col-md-1 header-element" onclick="typeselect('')"><img src="images/logo.png" style="height: 70px; width:auto;"></div>
                 <div class="col-md-1 header-element" onclick="typeselect('แกง')"><span class="font-header">แกง</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ผัด')"><span class="font-header">ผัด</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ทอด')"><span class="font-header">ทอด</span></div>
@@ -90,8 +82,8 @@
                 <div class="col-md-1 header-element" onclick="typeselect('ข้าว')"><span class="font-header">ข้าว</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('เครื่องดื่ม')"><span class="font-header">เครื่องดื่ม</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ของหวาน')"><span class="font-header">ของหวาน</span></div>
-                <div class="col-md-2 header-element"><span class="font-header">รายการอาหารที่สั่ง</span></div>
-                <div class="col-md-1 header-element"><span class="font-header">โต็ะ <?php echo $_GET['table']?></span></div>
+                <div class="col-md-2 header-element" onclick="window.location.href = 'order.php';"><span class="font-header">รายการอาหารที่สั่ง</span></div>
+                <div class="col-md-1 header-element"><span class="font-header">โต๊ะ <?php echo $_SESSION["table"]?></span></div>
             </div>
         </div>
     </div>
@@ -103,7 +95,7 @@
         <img src="images/payment-icon-5646.png" width="150px" height="150px">
         <h2>ยืนยันการเรียกเก็บเงิน</h2>
         <p>ราคารวม:<?php
-            $table = $_GET['table'];
+            $table = $_SESSION["table"];
             $sql = "SELECT amount FROM cus_table WHERE table_id=$table;";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc($result);
@@ -148,7 +140,7 @@
             <div style="margin-top: 10px;">
             <textarea id = "mass" name="massage" type="text" placeholder="ระบุข้อความเพื่มเติม" id="massage" style="border:black solid 1px; width:350px; height:70px"></textarea>
             </div>
-            <input type="hidden" name="tablenum" value="<?php echo $_GET['table']?>">
+            <input type="hidden" name="tablenum" value="<?php echo $_SESSION["table"]?>">
 
             <button type="button" class="btn btn-success" style="margin-top:10px" onclick="callemp('call')">ยืนยัน</button>
         </form>
@@ -157,7 +149,7 @@
 
 
 <body>
-    <form action="testmenu.php" method="GET">
+    <form action="confirm.php" method="GET">
     <div class="container" id="soup" style="margin-top:10px">
         <div class="row"><h1>แกง</h1></div>
     <?php
@@ -345,7 +337,7 @@
         }
     ?>
     </div>
-
+    
     <input type="hidden" name="row"
     <?php
         echo "value='".$numrow."'"
