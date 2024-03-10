@@ -8,56 +8,7 @@
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
 </head>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        }
 
-    header{
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        height: fit-content;
-        border: yellow solid;
-    }
-    footer{
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        background-color: gray;
-        padding: 15px;
-        text-align: center;
-    }
-    #header-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height:100%;
-        }
-    .header-element{
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .header-element:hover{
-        background-color: yellowgreen;
-    }
-    .font-header{
-        font-size: 28px;
-    }
-    input[type="number"] {
-        -webkit-appearance: textfield;
-        -moz-appearance: textfield;
-        appearance: textfield;
-    }
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none;
-    }
-</style>
 <?php
     $servername = "webpro.cpcueeyq8pic.us-east-1.rds.amazonaws.com";
     $username = "admin"; //ตามที่กำหนดให้
@@ -66,14 +17,19 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     session_start();
-    $_SESSION["table"] = $_GET['table'];
+    if (isset($_GET['table'])){
+        $table = $_GET['table'];
+        $sql = "UPDATE cus_table SET stutus = 1 WHERE table_id = $table";
+        $result = mysqli_query($conn, $sql);
+        $_SESSION["table"] = $_GET['table'];
+    }
 ?>
 
 <header style="background-color: Yellow;">
     <div class="container-fluid" id="header-container">
         <div class="container-fluid">
             <div class="row" style="text-align: center;">
-                <div class="col-md-1 header-element" onclick="typeselect('')"><img src="images/logo.png" style="height: 70px; width:auto;"></div>
+                <div class="col-md-1 header-element nohover" onclick="typeselect('')"><img src="images/logo.png" style="height: 70px; width:auto;"></div>
                 <div class="col-md-1 header-element" onclick="typeselect('แกง')"><span class="font-header">แกง</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ผัด')"><span class="font-header">ผัด</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ทอด')"><span class="font-header">ทอด</span></div>
@@ -83,7 +39,7 @@
                 <div class="col-md-1 header-element" onclick="typeselect('เครื่องดื่ม')"><span class="font-header">เครื่องดื่ม</span></div>
                 <div class="col-md-1 header-element" onclick="typeselect('ของหวาน')"><span class="font-header">ของหวาน</span></div>
                 <div class="col-md-2 header-element" onclick="window.location.href = 'order.php';"><span class="font-header">รายการอาหารที่สั่ง</span></div>
-                <div class="col-md-1 header-element"><span class="font-header">โต๊ะ <?php echo $_SESSION["table"]?></span></div>
+                <div class="col-md-1 header-element nohover"><span class="font-header">โต๊ะ <?php echo $_SESSION["table"]?></span></div>
             </div>
         </div>
     </div>
@@ -420,69 +376,9 @@
             rice.classList.remove('hidden');
         }
     }
-    function callemp(act){
-        var selectElement = document.getElementById("promselect");
-        var othertext = document.getElementById("othertext");
-        var warn1 = document.getElementById("selectwarning1");
-        var warn2 = document.getElementById("selectwarning2");
-        var choice = document.getElementById("choice");
-
-        if (selectElement.value === "" && act == "call"){
-            warn1.style.display = 'block';
-            return;
-        }else if(selectElement.value === "other" && othertext.value === "" && act == "call"){
-            warn2.style.display = 'block';
-            return;
-        }
-
-        var formData = new FormData(document.getElementById("myForm"));
-
-        // Send data via AJAX
-        fetch('callemp.php', {
-            method: 'POST',
-            body: formData
-        }).then(response => {
-            console.log("pass")
-        }).catch(error => {
-            console.error('Error:', error);
-        });
-
-        document.getElementById('popupPay').style.display = 'none';
-        document.getElementById('popupCall').style.display = 'none';
-        document.getElementById('popupSuscess').style.display = 'block';
-        selectElement.value = "";
-        document.getElementById('othertext').value = '';
-        document.getElementById('mass').value = '';
-    }
-    function popup(act){
-        if (act == "pay"){
-            document.getElementById('popupPay').style.display = 'block';
-        }else if(act == "call"){
-            document.getElementById('popupCall').style.display = 'block';
-        }
-        
-    }
-    function popclose(){
-        document.getElementById('popupPay').style.display = 'none';
-        document.getElementById('popupCall').style.display = 'none';
-        document.getElementById('popupSuscess').style.display = 'none';
-        document.getElementById("selectwarning1").style.display = 'none';
-        document.getElementById("selectwarning2").style.display = 'none';
-    }
-    function toggleTextInput() {
-            var selectElement = document.getElementById("promselect");
-            var otherDiv = document.getElementById("otherInput");
-            var othertext = document.getElementById("othertext");
-
-            if (selectElement.value === "other") {
-                otherDiv.style.display = "block";
-            } else {
-                otherDiv.style.display = "none";
-                othertext.value="";
-            }
-        }
     
 </script>
+<script src="popupfoot.js"></script>
 </form>
 </body>
 </html>
