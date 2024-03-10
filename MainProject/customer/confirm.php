@@ -20,9 +20,16 @@
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
+        body{
+            background-color: grey;
+        }
+        .menu{
+            max-width: 50%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+            background-color: white;
         }
     </style>
 </head>
@@ -98,6 +105,7 @@
 <body>
     
     <div class="menu">
+    <h1 style="text-align: Center;">ยืนยันรายการอาหาร</h1>
     <?php
         $row = $_GET['row'];
         $order = $_GET['menu'];
