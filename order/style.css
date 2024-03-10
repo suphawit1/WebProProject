@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "K2D", sans-serif;
+    font-weight: 400;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #622c0b;
+    padding: 0px 20px;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    column-gap: 20px;
+    & a {
+        text-decoration: none;
+        color: #fff;
+        font-size: x-large;
+    }
+}
+
+.btn-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    column-gap: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.status {
+    text-align: center;
+    width: 150px;
+    padding: 10px;
+    border-radius: .5rem;
+    background-color: #622c0b;
+    color: #fff;
+    font-size: large;
+}
+
+.status:hover {
+    background-color: transparent;
+    color: #622c0b;
+    border: solid 2px #622c0b;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+hr {
+    width: 80%;
+}
+
+.cook {
+    color: #FFDB58;
+    font-size: medium;
+}
+
+.wait-for-serve {
+    color: red;
+    font-size: medium;
+}
+
+.served {
+    color: green;
+    font-size: medium;
+}
