@@ -16,27 +16,24 @@
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
     <style>
+        body{
+            background-color: grey;
+        }
         .rows{
+            max-width: 50%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+            background-color: white;
+        }
+        .detail{
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 5%;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-gap: 5rem;
-        }
-        .box{
-            border-radius: 15px;
-            background-color: gray;
-            width: 110%;
-            padding: 2rem;
-        }
-        .box img{
-            width: 90%;
-            align-self: center;
-            margin-left: 0.5rem;
-        }
-
-        .box h4{
-            font-size: 200%;
-            margin-bottom: 0.5rem;
-            margin-left: 0.5rem;
         }
     </style>
 </head>
@@ -112,8 +109,9 @@
 <body>
     <div>
         <div class="rows">
+        <h1 style="text-align: Center;">รายการอาหารทั้งหมดของคุณ</h1>
+        <div class="detail">
         <?php
-            
             $table = $_SESSION["table"];
             $sql ="SELECT DISTINCT menu FROM menu_order where table_no = $table";
             $result = mysqli_query($conn, $sql);
@@ -130,11 +128,11 @@
                     echo "</div>";
                 }
             }else{
-                echo "<h1>ยังไม่มีรายการอาหารที่ถูกสั่ง</h1>";
+                echo "</div><h1>ยังไม่มีรายการอาหารที่ถูกสั่ง</h1>";
             }
 
             mysqli_close($conn);
-            echo "</div>";
+            echo "</div></div>";
         ?>
     </div>
     <footer>
