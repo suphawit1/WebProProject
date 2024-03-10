@@ -7,8 +7,8 @@
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     session_start();
 
-    $row = $_GET['row'];
-    $order = json_decode($_GET['menu'], true);
+    $row = $_POST['row'];
+    $order = json_decode($_POST['menu'], true);
     $table = (int)$_SESSION["table"];
 
     foreach (range(1, $row) as $i) {
@@ -45,8 +45,7 @@
     <div class="popup-content" style="text-align: center;">
         <img src="images/check_icon.png" width="150px" height="150px">
         <h2>สั่งอาหารเรียบร้อย</h2>
-        <form method="GET" action="order.php">
-            <input type="hidden" name="table" value= <?php echo $table;?>>
+        <form method="POST" action="menu.php">
             <button type="submit" class="btn btn-success">ยืนยัน</button>
         </form>
         
