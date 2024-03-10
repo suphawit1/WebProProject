@@ -54,6 +54,7 @@
 
         .eleinfirst h1 {
             font-size: 48px;
+text-wrap: nowrap;
         }
 
         .eleinfirst p {
@@ -210,7 +211,7 @@
 
 <body>
     <header>
-        <h1 class="headhome">Logo</h1>
+        <h1 class="headhome"><img src="images/logo.png" style="height: 70px; width:auto;"></h1>
         <h1 class="headhome">ครัวเรือนไทย</h1>
     </header>
 
