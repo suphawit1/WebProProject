@@ -27,6 +27,7 @@ if (isset($_GET['role'])){
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                 document.getElementById("order").innerHTML = this.responseText;
+                document.getElementById("order").style.display = "block";
             }
             const data = "status=<?php echo $_GET['status'] ?? 0 ?>";
             xhttp.open("POST", "orderlist.php");
@@ -34,7 +35,6 @@ if (isset($_GET['role'])){
             xhttp.send(data);
         }
         setInterval(function() {
-            document.getElementById("order").style.display = "block";
             orderlist();
         }, 2000);
     </script>
