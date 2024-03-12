@@ -21,6 +21,7 @@
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
       document.getElementById("noti").innerHTML = this.responseText;
+      document.getElementById("load").style.display = "none";
     }
     xhttp.open("GET", "RTNotification.php");
     xhttp.send();
@@ -29,6 +30,8 @@
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
       document.getElementById("list").innerHTML = this.responseText;
+      document.getElementById("load").style.display = "none";
+      document.getElementById("list").style.display = "block";
     }
     xhttp.open("GET", "notifylist.php");
     xhttp.send();
@@ -51,10 +54,6 @@
       if (document.getElementById("list") != null){
         notilist();
       }
-    }
-    document.getElementById("load").style.display = "none";
-    if (document.getElementById("list") != null){
-      document.getElementById("list").style.display = "block";
     }
     document.getElementById("main").style.display = "block";
   }, 3000);
