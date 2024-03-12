@@ -6,7 +6,12 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     session_start();
-    $tableNo = $_SESSION['table'];
+    if ($_SESSION['table']){
+        $tableNo = $_SESSION['table'];
+    }else{
+        $tableNo = $_POST['tablenum'];
+    }
+    
     if ($_POST['problem'] != ""){
         $type = $_POST['problem'];
         $massage = $_POST['massage'];
