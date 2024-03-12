@@ -19,6 +19,14 @@
     <link rel="stylesheet" href="styles.css">
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
+    <div id="popthank" class="popup-container">
+        <div class="popup-content" style="text-align: center;">
+            <span class="close-button" id="closePopupButton" onclick="window.location.href = 'index.php'";>&times;</span>
+            <img src="images/thank-you-png-icon-17618.png" width="150px" height="150px">
+            <h2>ขอบคุณที่ใช้บริการ</h2>
+            <button type="button" class="btn btn-success" style="margin-top:10px" onclick="window.location.href = 'index.php'">ยืนยัน</button>
+        </div>
+    </div>
     <style>
         body{
             background-color: grey;
@@ -31,9 +39,34 @@
             text-align: left;
             background-color: white;
         }
+        .detail{
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 5rem;
+        }
     </style>
+    <script>
+    function checkSession() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'checkSession.php', true);
+        xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            num = parseInt(xhr.responseText);
+            if (num == 1){
+                document.getElementById('popthank').style.display = "block";
+            }
+        }
+        };
+        xhr.send();
+    }
+
+    setInterval(checkSession, 2000);
+    </script>
 </head>
-    <header style="background-color: Yellow;">
+    <header style="background-color: #622c0b;">
         <div class="container-fluid" id="header-container">
             <div class="container-fluid">
                 <div class="row" style="text-align: center;">
@@ -115,7 +148,7 @@
                 $sql = "SELECT * FROM menu WHERE menuid = $i";
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_assoc($result);
-                echo "<div class='box'>";
+                echo "<div class='detail'>";
                 echo "<h4>" . $row["name"] . "</h4>";
                 echo "<h4>x" . $order[$i] . "</h4>";
                 echo "<h4>" . $row["price"]*$order[$i] . " บาท</h4>";
