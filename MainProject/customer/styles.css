@@ -58,7 +58,7 @@ header{
     top: 0;
     z-index: 1000;
     height: fit-content;
-    border: yellow solid;
+    border: #622c0b solid;
 }
 footer{
     position: fixed;
@@ -75,13 +75,14 @@ footer{
     height:100%;
 }
 .header-element{
+    color:white;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .header-element:hover:not(.nohover){
-    background-color: yellowgreen;
+    background-color: #77360e;
 }
 .font-header{
     font-size: 28px;
