@@ -9,6 +9,32 @@
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
 </head>
 
+<div id="popthank" class="popup-container">
+    <div class="popup-content" style="text-align: center;">
+        <span class="close-button" id="closePopupButton" onclick="window.location.href = 'index.php'";>&times;</span>
+        <img src="images/thank-you-png-icon-17618.png" width="150px" height="150px">
+        <h2>ขอบคุณที่ใช้บริการ</h2>
+        <button type="button" class="btn btn-success" style="margin-top:10px" onclick="window.location.href = 'index.php'">ยืนยัน</button>
+    </div>
+</div>
+
+<script>
+    function checkSession() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'checkSession.php', true);
+        xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            num = parseInt(xhr.responseText);
+            if (num == 1){
+                document.getElementById('popthank').style.display = "block";
+            }
+        }
+        };
+        xhr.send();
+}
+
+setInterval(checkSession, 2000);
+</script>
 <?php
     $servername = "webpro.cpcueeyq8pic.us-east-1.rds.amazonaws.com";
     $username = "admin"; //ตามที่กำหนดให้
@@ -18,14 +44,17 @@
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     session_start();
     if (isset($_GET['table'])){
-        $table = $_GET['table'];
+        $table = (int)$_GET['table'];
         $sql = "UPDATE cus_table SET stutus = 1 WHERE table_id = $table";
         $result = mysqli_query($conn, $sql);
         $_SESSION["table"] = $_GET['table'];
+        $session_id = session_id();
+        $sql = "INSERT INTO table_session(session_id,table_no) VALUES ('$session_id',$table)";
+        $result = mysqli_query($conn, $sql);
     }
 ?>
 
-<header style="background-color: Yellow;">
+<header style="background-color: #622c0b;">
     <div class="container-fluid" id="header-container">
         <div class="container-fluid">
             <div class="row" style="text-align: center;">
