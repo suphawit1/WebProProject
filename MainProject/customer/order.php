@@ -15,6 +15,31 @@
     <link rel="stylesheet" href="styles.css">
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
+    <div id="popthank" class="popup-container">
+        <div class="popup-content" style="text-align: center;">
+            <span class="close-button" id="closePopupButton" onclick="window.location.href = 'index.php'";>&times;</span>
+            <img src="images/thank-you-png-icon-17618.png" width="150px" height="150px">
+            <h2>ขอบคุณที่ใช้บริการ</h2>
+            <button type="button" class="btn btn-success" style="margin-top:10px" onclick="window.location.href = 'index.php'">ยืนยัน</button>
+        </div>
+    </div>
+    <script>
+    function checkSession() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'checkSession.php', true);
+        xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            num = parseInt(xhr.responseText);
+            if (num == 1){
+                document.getElementById('popthank').style.display = "block";
+            }
+        }
+        };
+        xhr.send();
+    }
+
+    setInterval(checkSession, 2000);
+    </script>
     <style>
         body{
             background-color: grey;
@@ -37,7 +62,7 @@
         }
     </style>
 </head>
-    <header style="background-color: Yellow;">
+    <header style="background-color: #622c0b;">
         <div class="container-fluid" id="header-container">
             <div class="container-fluid">
                 <div class="row" style="text-align: center;">
@@ -110,7 +135,6 @@
     <div>
         <div class="rows">
         <h1 style="text-align: Center;">รายการอาหารทั้งหมดของคุณ</h1>
-        <div class="detail">
         <?php
             $table = $_SESSION["table"];
             $sql ="SELECT DISTINCT menu FROM menu_order where table_no = $table";
@@ -119,7 +143,7 @@
             if ($numrow > 0){
                 while($row = mysqli_fetch_assoc($result)) {
                     $menu = $row['menu'];
-                    echo "<div class='box'>";
+                    echo "<div class='detail'>";
                     echo "<h4>" . $menu . "</h4>";
                     $amount = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(menu) FROM menu_order WHERE menu='$menu' AND table_no=$table;"));
                     echo "<h4>x" . $amount["COUNT(menu)"] . "</h4>";
@@ -128,7 +152,7 @@
                     echo "</div>";
                 }
             }else{
-                echo "</div><h1>ยังไม่มีรายการอาหารที่ถูกสั่ง</h1>";
+                echo "<h1>ยังไม่มีรายการอาหารที่ถูกสั่ง</h1></div>";
             }
 
             mysqli_close($conn);
