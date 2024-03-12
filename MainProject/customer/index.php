@@ -54,7 +54,6 @@
 
         .eleinfirst h1 {
             font-size: 48px;
-text-wrap: nowrap;
         }
 
         .eleinfirst p {
@@ -210,9 +209,9 @@ text-wrap: nowrap;
 </head>
 
 <body>
-    <header>
-        <h1 class="headhome"><img src="images/logo.png" style="height: 70px; width:auto;"></h1>
-        <h1 class="headhome">ครัวเรือนไทย</h1>
+    <header style="background-color:#622c0b; height:70px;">
+        <img class="headhome" src="images/logo.png" style="height: 70px; width:auto;"></h1>
+        <h1 class="headhome" style="color:white">ครัวเรือนไทย</h1>
     </header>
 
     <div class="firstcon">
@@ -345,11 +344,15 @@ text-wrap: nowrap;
                     // Create connection
                     $conn = mysqli_connect($servername, $username, $password, $dbname);
                 
-                    $sql = "SELECT table_id FROM cus_table where stutus=0";
+                    $sql = "SELECT table_id,stutus FROM cus_table ORDER BY stutus ASC";
                     $result = mysqli_query($conn, $sql);
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value=".$row['table_id'].">".$row['table_id']."</option>";
+                            if ($row['stutus'] == 0){
+                                echo "<option value=".$row['table_id'].">".$row['table_id']."</option>";
+                            }else{
+                                echo "<option value=".$row['table_id'].">".$row['table_id']." (มีผู้ใช้อยู่)</option>";
+                            }
                         }
                     }
                     mysqli_close($conn);
