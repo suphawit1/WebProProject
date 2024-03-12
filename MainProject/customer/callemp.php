@@ -16,8 +16,11 @@
         $sql = "INSERT INTO emp_notify(tableNo,type,massage,time) values($tableNo,'$type','$massage',NOW());";
         $result = mysqli_query($conn, $sql);
     }else{
-        $sql = "INSERT INTO emp_notify(tableNo,type,massage,time) values($tableNo,'เรียกเก็บเงิน','เรียกเก็บเงิน',NOW());";
+        $sql = "SELECT amount FROM cus_table where table_id = $tableNo";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $amount = "ราคารวม: ".$row['amount']." บาท";
+        $sql = "INSERT INTO emp_notify(tableNo,type,massage,time) values($tableNo,'เรียกเก็บเงิน','$amount',NOW());";
         $result = mysqli_query($conn, $sql);
     }
-    
 ?>
